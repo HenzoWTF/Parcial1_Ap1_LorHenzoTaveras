@@ -4,6 +4,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Model
 {
     public class MetasFinancieras
     {
+        [Key]
         public int? MetaId { get; set; }
 
         [DataType(DataType.Date)]
