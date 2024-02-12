@@ -1,11 +1,47 @@
-﻿@page "/Delete/{metasId:int}"
+﻿@page "/Delete/{Id:int}"
 
+@rendermode InteractiveServer
 @inject MetasService metasService
 @inject NavigationManager navigationManager
 
 
+<PageTitle>Eliminar Metas</PageTitle>
+
+<div class="container">
+    <div class="shadow-lg">
+        <h1>Eliminar Metas</h1>
+        <div class="card-body">
+            <h4><strong>Est&aacute;s seguro que quieres eliminar?</strong></h4>
+            <div class="mb-1">
+                <p class="mb-0">Id: @metas.MetaId</p>
+            </div>
+
+            <div class="mb-1">
+                <p class="mb-0">Fecha: @metas.Fecha</p>
+            </div>
+
+            <div class="mb-1">
+                <p class="mb-0">Observaci&oacute;n: @metas.Descripcion</p>
+            </div>
+
+            <div class="mb-1">
+                <p class="mb-0">Monto: @metas.Monto</p>
+            </div>
+
+
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-danger" @onclick="Eliminar">Eliminar</button>
+                <a href="/" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 @code {
-    public int metasId { get; set; }
+    [Parameter]
+    public int Id { get; set; }
 
     private MetasFinancieras metas { get; set; } = new MetasFinancieras();
 
@@ -13,16 +49,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (metasId > 0)
+        if (Id > 0)
         {
-            metas = await metasService.Buscar(metasId);
+            metas = await metasService.Buscar(Id);
         }
     }
 
     private async Task Eliminar()
     {
         Console.WriteLine("Eliminar");
-        if (metasId != 0)
+        if (Id != 0)
         {
             Console.WriteLine("Eliminar dentro");
             await metasService.Eliminar(metas);
