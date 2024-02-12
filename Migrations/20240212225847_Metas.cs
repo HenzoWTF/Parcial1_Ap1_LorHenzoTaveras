@@ -12,7 +12,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "aportes",
+                name: "Metas",
                 columns: table => new
                 {
                     MetaId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -31,7 +31,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "aportes");
+                name: "Metas");
         }
     }
 }

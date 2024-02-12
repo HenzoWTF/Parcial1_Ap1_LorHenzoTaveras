@@ -37,7 +37,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
 
                     b.HasKey("MetaId");
 
-                    b.ToTable("aportes");
+                    b.ToTable("Metas");
                 });
 #pragma warning restore 612, 618
         }
