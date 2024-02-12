@@ -9,6 +9,6 @@ namespace Parcial1_Ap1_LorHenzoTaveras.DAL
         public Context(DbContextOptions<Context> options) : base(options)
         {
         }
-        public DbSet<MetasFinancieras> aportes { get; set; }
+        public DbSet<MetasFinancieras> Metas { get; set; }
     }
 }
