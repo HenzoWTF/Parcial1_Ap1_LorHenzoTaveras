@@ -37,7 +37,10 @@
                 <td>@metas.Descripcion</td>
                 <td>@metas.Monto</td>
                 <td>
-                    <a href="/edit/@metas.MetaId">Ver</a>
+                    <div>
+                        <a href="/edit/@metas.MetaId" class="btn btn-outline-primary">Editar</a>
+                        <a href="/Delete/@metas.MetaId" class="btn btn-outline-danger">Eliminar</a>
+                    </div>
                 </td>
              </tr>
         }
