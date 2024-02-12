@@ -19,7 +19,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
 
             modelBuilder.Entity("Parcial1_Ap1_LorHenzoTaveras.Model.MetasFinancieras", b =>
                 {
-                    b.Property<int?>("MetaId")
+                    b.Property<int>("MetaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 

@@ -23,7 +23,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_aportes", x => x.MetaId);
+                    table.PrimaryKey("PK_Metas", x => x.MetaId);
                 });
         }
 

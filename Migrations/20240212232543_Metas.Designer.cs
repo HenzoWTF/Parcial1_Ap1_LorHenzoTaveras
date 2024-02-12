@@ -11,7 +11,7 @@ using Parcial1_Ap1_LorHenzoTaveras.DAL;
 namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240212225847_Metas")]
+    [Migration("20240212232543_Metas")]
     partial class Metas
     {
         /// <inheritdoc />
@@ -22,7 +22,7 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Migrations
 
             modelBuilder.Entity("Parcial1_Ap1_LorHenzoTaveras.Model.MetasFinancieras", b =>
                 {
-                    b.Property<int?>("MetaId")
+                    b.Property<int>("MetaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
