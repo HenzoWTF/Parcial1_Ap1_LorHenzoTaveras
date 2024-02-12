@@ -1,7 +1,61 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@rendermode InteractiveServer
+@inject MetasService metasService
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<PageTitle>Consulta</PageTitle>
+
+
+
+<h1>Consulta</h1>
+<div>
+    <a href="/create"><i>Crear Metas</i></a>
+</div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Fecha</th>
+        <th>Descripci&omicron;n</th>
+        <th>Monto</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        @if (metas.Count == 0)
+        {
+            @: No hay metas
+        }
+        @foreach (var metas in metas)
+        {
+            <tr>
+                <td>@metas.MetaId</td>
+                <td>@metas.Fecha</td>
+                <td>@metas.Descripcion</td>
+                <td>@metas.Monto</td>
+                <td>
+                    <a href="/edit/@metas.MetaId">Ver</a>
+                </td>
+             </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+@code {
+    private MetasFinancieras meta { get; set; } = new MetasFinancieras();
+    private List<MetasFinancieras> metas { get; set; } = new List<MetasFinancieras>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        metas = await metasService.Getist(a => true);
+    }
+
+}
