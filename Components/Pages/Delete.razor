@@ -1,5 +1,33 @@
-﻿<h3>Delete</h3>
+﻿@page "/Delete/{metasId:int}"
+
+@inject MetasService metasService
+@inject NavigationManager navigationManager
+
 
 @code {
+    public int metasId { get; set; }
+
+    private MetasFinancieras metas { get; set; } = new MetasFinancieras();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (metasId > 0)
+        {
+            metas = await metasService.Buscar(metasId);
+        }
+    }
+
+    private async Task Eliminar()
+    {
+        Console.WriteLine("Eliminar");
+        if (metasId != 0)
+        {
+            Console.WriteLine("Eliminar dentro");
+            await metasService.Eliminar(metas);
+            navigationManager.NavigateTo("/");
+        }
+    }
 
 }
