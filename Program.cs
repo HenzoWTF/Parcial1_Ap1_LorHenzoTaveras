@@ -1,10 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using Parcial1_Ap1_LorHenzoTaveras.Components;
+using Parcial1_Ap1_LorHenzoTaveras.DAL;
+using Parcial1_Ap1_LorHenzoTaveras.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
+
+builder.Services.AddDbContext<Context>(options => options.UseSqlite("Data Source=Metas.db"));
+builder.Services.AddScoped<MetasService>();
 
 var app = builder.Build();
 
