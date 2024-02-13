@@ -1,0 +1,76 @@
+﻿@page "/edit/{Id:int}"
+
+@inject NavigationManager navigationManager
+@inject MetasService metasService
+
+<PageTitle>Modificar Metas</PageTitle>
+
+<EditForm Model="metas" OnValidSubmit="Guardar" FormName="EditarMetas">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <h1>Modificar Metas</h1>
+
+            <div class="card-body">
+
+                <label>Id</label>
+                <div class="input-group mb-3">
+                    <InputNumber @bind-Value="metas.MetaId" class="form-control" />
+                    <ValidationMessage For="@(() => metas.MetaId)" />
+                </div>
+
+                <label class="form-label" for="fecha"><strong>Fecha:</strong></label>
+                <InputDate id="fecha" class="form-control" @bind-Value="metas.Fecha"></InputDate>
+                <ValidationMessage For="@(() => metas.Fecha)"></ValidationMessage>
+
+
+                <label>Descripci&oacute;n</label>
+                <div class="input-group mb-3">
+                    <InputText @bind-Value="metas.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => metas.Descripcion)" />
+                </div>
+
+                <label>Monto</label>
+                <div class="input-group mb-3">
+                    <InputNumber @bind-Value="metas.Monto" class="form-control" />
+                    <ValidationMessage For="@(() => metas.Monto)" />
+                </div>
+
+                <div class="card-footer d-flex justify-content-center">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="/" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private MetasFinancieras metas { get; set; } = new MetasFinancieras();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id > 0)
+        {
+            metas = await metasService.Buscar(Id);
+        }
+    }
+
+    private async Task Guardar()
+    {
+        if (metas.MetaId != 0)
+        {
+            await metasService.Guardar(metas);
+        }
+
+        navigationManager.NavigateTo("/");
+    }
+
+}
