@@ -54,14 +54,20 @@
 </EditForm>
 
 @code {
-private MetasFinancieras metas { get; set; } = new MetasFinancieras();
+    private MetasFinancieras metas { get; set; } = new MetasFinancieras();
+    public string mensaje = " ";
 
 
-    private async Task Guardar()
+    public async void Guardar()
     {
         if (await metasService.Guardar(metas))
         {
             navigationManager.NavigateTo("/");
+        }
+        if (string.IsNullOrWhiteSpace(metas.Descripcion))
+        {
+            mensaje = "Es obligatorio que se rellenen todos los campos";
+            return;
         }
     }
 

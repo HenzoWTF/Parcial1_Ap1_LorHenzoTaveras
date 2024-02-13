@@ -2,6 +2,7 @@
 
 @inject NavigationManager navigationManager
 @inject MetasService metasService
+@inject IJSRuntime ijsRuntime
 
 <PageTitle>Modificar Metas</PageTitle>
 
@@ -68,9 +69,51 @@
         if (metas.MetaId != 0)
         {
             await metasService.Guardar(metas);
+            navigationManager.NavigateTo("/");
         }
 
         navigationManager.NavigateTo("/");
+
     }
+
+
+
+
+
+
+    public async Task Modificar()
+    {
+        if (await Validar())
+            return;
+        else
+        {
+            var modificar = await metasService.Guardar(metas);
+            if (modificar)
+            {
+                navigationManager.NavigateTo("/");
+            }
+        }
+    }
+
+    public async Task<bool> Validar()
+    {
+        var descripcion = await metasService.BuscarDescipcion(metas.Descripcion);
+        var Monto = await metasService.BuscarMonto(metas.Monto);
+        if (nombre != null)
+        {
+            mensaje = "Error, ya existe un cliente con este nombre";
+            return true;
+        }
+        if (rnc != null)
+        {
+            mensaje = "Error, ya existe un cliente con este RNC";
+            return true;
+        }
+
+        return false;
+    }
+
+
+}
 
 }

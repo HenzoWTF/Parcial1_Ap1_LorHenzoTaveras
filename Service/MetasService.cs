@@ -67,6 +67,14 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Service
         }
 
 
+        public async Task<MetasFinancieras?> BuscarMonto(int monto)
+        {
+            return await _contexto.Metas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Monto == monto);
+        }
+
+
         public async Task<bool> Eliminar(MetasFinancieras meta)
         {
             var cantidad = await _contexto.Metas
