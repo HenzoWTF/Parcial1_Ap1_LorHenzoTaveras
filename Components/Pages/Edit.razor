@@ -6,7 +6,7 @@
 
 <PageTitle>Modificar Metas</PageTitle>
 
-<EditForm Model="metas" OnValidSubmit="Guardar" FormName="EditarMetas">
+<EditForm Model="metas" OnValidSubmit="@Guardar" FormName="EditarMetas">
     <DataAnnotationsValidator />
 
     <div class="container">
@@ -40,7 +40,7 @@
 
                 <div class="card-footer d-flex justify-content-center">
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
                         <a href="/" class="btn btn-secondary">Cancelar</a>
                     </div>
                 </div>
@@ -53,7 +53,6 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-
     private MetasFinancieras metas { get; set; } = new MetasFinancieras();
 
     protected override async Task OnInitializedAsync()
@@ -66,54 +65,23 @@
 
     private async Task Guardar()
     {
-        if (metas.MetaId != 0)
+        if (await Validar())
         {
             await metasService.Guardar(metas);
             navigationManager.NavigateTo("/");
-        }
-
-        navigationManager.NavigateTo("/");
-
-    }
-
-
-
-
-
-
-    public async Task Modificar()
-    {
-        if (await Validar())
-            return;
-        else
-        {
-            var modificar = await metasService.Guardar(metas);
-            if (modificar)
-            {
-                navigationManager.NavigateTo("/");
-            }
         }
     }
 
     public async Task<bool> Validar()
     {
         var descripcion = await metasService.BuscarDescipcion(metas.Descripcion);
-        var Monto = await metasService.BuscarMonto(metas.Monto);
-        if (nombre != null)
+        if (descripcion != null)
         {
-            mensaje = "Error, ya existe un cliente con este nombre";
             return true;
         }
-        if (rnc != null)
-        {
-            mensaje = "Error, ya existe un cliente con este RNC";
-            return true;
-        }
-
         return false;
     }
 
 
-}
 
 }

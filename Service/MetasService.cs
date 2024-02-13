@@ -40,7 +40,6 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Service
             return await _contexto.SaveChangesAsync() > 0;
         }
 
-
         public async Task<bool> Guardar(MetasFinancieras metas)
         {
             if (!await Existe(metas.MetaId) && !await DescripcionRepetida(metas.Descripcion))
@@ -64,14 +63,6 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Service
             return await _contexto.Metas
                 .AsNoTracking()
                 .FirstOrDefaultAsync(a => a.MetaId == id);
-        }
-
-
-        public async Task<MetasFinancieras?> BuscarMonto(int monto)
-        {
-            return await _contexto.Metas
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Monto == monto);
         }
 
 
