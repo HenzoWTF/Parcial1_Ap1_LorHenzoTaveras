@@ -15,6 +15,6 @@ namespace Parcial1_Ap1_LorHenzoTaveras.Model
 
         [Required(ErrorMessage = "El campo Monto es obligatorio")]
 
-        public decimal? Monto { get; set; }
+        public decimal Monto { get; set; }
     }
 }
